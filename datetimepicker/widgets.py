@@ -107,6 +107,9 @@ class DateTimePicker(DateTimeInput):
         })
 
         if value != '':
+            # for Django < 
+            if not hasattr(self, 'format_value'):
+                self.format_value = self._format_value
             input_attrs.update({
                 'value': force_text(self.format_value(value))
             })
