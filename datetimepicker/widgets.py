@@ -95,7 +95,7 @@ class DateTimePicker(DateTimeInput):
 
         super(DateTimePicker, self).__init__(attrs, format_string)
 
-    def render(self, name, value, attrs=None, prefix='datetimepicker'):
+    def render(self, name, value, attrs=None, prefix='datetimepicker', renderer=None):
 
         if value is None:
             value = ''
@@ -121,10 +121,11 @@ class DateTimePicker(DateTimeInput):
             )
         })
 
-        rendered = render_to_string(
+        rendered = self._render(
             'datetimepicker/div.html',
             context={'div_attrs': flatatt(self.div_attrs),
-                     'input_attrs': flatatt(input_attrs)}
+                     'input_attrs': flatatt(input_attrs)},
+            renderer=renderer
         )
 
         if self.use_script_tag:
